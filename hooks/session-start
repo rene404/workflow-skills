@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# SessionStart hook for the workflow-skills plugin.
+#
+# Injects the using-template router skill into the agent's context at the
+# start of every session, so it picks the smallest combination of
+# skill/agent/prompt/instruction for the user's request before doing work.
+#
+# Detects the harness via env vars and emits the right JSON dialect:
+#   - Cursor:      additional_context (snake_case, top-level)
+#   - Claude Code: hookSpecificOutput.additionalContext (nested)
+#   - Codex/SDK:   additionalContext (camelCase, top-level)
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+router_path="${PLUGIN_ROOT}/skills/using-template/SKILL.md"
+router_content=$(cat "${router_path}" 2>&1 || echo "Error reading using-template router")
+
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+router_escaped=$(escape_for_json "$router_content")
+
+session_context="<IMPORTANT>\nThe workflow-skills plugin is loaded. Before any non-trivial task, follow the routing protocol below to pick the smallest combination of skill / agent playbook / reusable prompt / scoped instruction.\n\nIf this project has its own router (e.g. skills/using-<project>/SKILL.md), prefer that — it has concrete routes for this codebase. The template below is the fallback when no project-specific router exists.\n\n---\n\n${router_escaped}\n</IMPORTANT>"
+
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  printf '{\n  "additional_context": "%s"\n}\n' "$session_context"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -z "${COPILOT_CLI:-}" ]; then
+  printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
+else
+  printf '{\n  "additionalContext": "%s"\n}\n' "$session_context"
+fi
+
+exit 0

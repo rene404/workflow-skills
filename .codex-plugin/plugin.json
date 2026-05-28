@@ -1,0 +1,41 @@
+{
+  "name": "workflow-skills",
+  "version": "0.1.0",
+  "description": "Methodology skills for coding agents — planning, design, TDD, systematic debugging, verification, code review, handoff. Stack-agnostic; pairs with project-local agents/prompts/instructions via a router template.",
+  "author": {
+    "name": "René Wörndl"
+  },
+  "homepage": "https://github.com/reneworndl/workflow-skills",
+  "repository": "https://github.com/reneworndl/workflow-skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "workflow",
+    "planning",
+    "tdd",
+    "debugging",
+    "code-review",
+    "router",
+    "agentic"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "workflow-skills",
+    "shortDescription": "Planning, TDD, debugging, review, and verification workflows for coding agents",
+    "longDescription": "Stack-agnostic methodology skills + a workflow router template. Use the router to map task descriptions (\"plan this\", \"test first\", \"is this safe?\", \"verify\") to the smallest combination of skill / agent playbook / reusable prompt / scoped instruction. Skills included: plan, tdd, verify, review, security-review, diagnose, handoff, grill-me, grill-with-docs, design, new-feature, zoom-out, devops, write-skill.",
+    "developerName": "René Wörndl",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Plan the next change before we touch any code.",
+      "Let's add a feature to this project.",
+      "Review the current diff.",
+      "Is this safe?"
+    ],
+    "brandColor": "#2563eb"
+  }
+}

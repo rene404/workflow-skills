@@ -1,0 +1,18 @@
+{
+  "name": "workflow-skills-dev",
+  "description": "Local development marketplace for workflow-skills",
+  "owner": {
+    "name": "René Wörndl"
+  },
+  "plugins": [
+    {
+      "name": "workflow-skills",
+      "description": "Methodology skills for coding agents: planning, design, TDD, debugging, verification, review, handoff",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "René Wörndl"
+      }
+    }
+  ]
+}
