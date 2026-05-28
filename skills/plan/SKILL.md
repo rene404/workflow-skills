@@ -24,7 +24,7 @@ No "TBD", no "as needed", no vague descriptions. If you can't write a specific f
 
 - Read the relevant files. Do not plan from memory.
 - Check `CONTEXT.md` for domain vocabulary.
-- If requirements are ambiguous, run `/grill-me` first.
+- If requirements are ambiguous, run `/clarify-requirements` first.
 
 ### 2. Identify the smallest safe change
 
@@ -56,6 +56,6 @@ No "TBD", no "as needed", no vague descriptions. If you can't write a specific f
 
 ## Related
 
-- `/grill-me` — clarify requirements before planning
+- `/clarify-requirements` — clarify requirements before planning
 - `/tdd` — execute the plan using red-green-refactor
 - `/verify` — confirm the full plan was executed correctly

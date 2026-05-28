@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "workflow-skills",
     "shortDescription": "Planning, TDD, debugging, review, and verification workflows for coding agents",
-    "longDescription": "Stack-agnostic methodology skills + a workflow router template. Use the router to map task descriptions (\"plan this\", \"test first\", \"is this safe?\", \"verify\") to the smallest combination of skill / agent playbook / reusable prompt / scoped instruction. Skills included: plan, tdd, verify, review, security-review, diagnose, handoff, grill-me, grill-with-docs, design, new-feature, zoom-out, devops, write-skill.",
+    "longDescription": "Stack-agnostic methodology skills + a workflow router template. Use the router to map task descriptions (\"plan this\", \"test first\", \"is this safe?\", \"verify\") to the smallest combination of skill / agent playbook / reusable prompt / scoped instruction. Skills included: plan, tdd, verify, review, security-review, diagnose, handoff, clarify-requirements, harden-plan, design, new-feature, zoom-out, devops, write-skill.",
     "developerName": "René Wörndl",
     "category": "Coding",
     "capabilities": [

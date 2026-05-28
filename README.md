@@ -14,8 +14,8 @@ Works in Claude Code, Codex, Cursor, and Copilot CLI through per-harness plugin 
   - `security-review` — deep security audit (secrets, auth, injection, path traversal)
   - `diagnose` — systematic debugging loop
   - `design` — minimal technical design before planning
-  - `grill-me` — requirements clarification
-  - `grill-with-docs` — stress-test a plan against project docs + create ADRs
+  - `clarify-requirements` — requirements clarification
+  - `harden-plan` — stress-test a plan against project docs + create ADRs
   - `new-feature` — full end-to-end orchestration
   - `handoff` — structured handoff document
   - `zoom-out` — architecture health review

@@ -15,7 +15,7 @@ A good design is the smallest one that satisfies the requirements — not the mo
 - Restate the goal in one sentence.
 - Identify what must be true for the design to be correct (acceptance criteria).
 - Identify what is explicitly out of scope.
-- If requirements are unclear, stop and use `/grill-me` first.
+- If requirements are unclear, stop and use `/clarify-requirements` first.
 
 ### 2. Identify the current state
 
@@ -74,7 +74,7 @@ For each significant decision, state:
 
 ## Related
 
-- `/grill-me` — clarify requirements before designing
-- `/grill-with-docs` — stress-test the design against the domain model before planning
+- `/clarify-requirements` — clarify requirements before designing
+- `/harden-plan` — stress-test the design against the domain model before planning
 - `/plan` — next step: turn the approved design into an ordered task plan
 - `/zoom-out` — if you need to understand the existing architecture before designing

@@ -86,7 +86,7 @@ Example rows (delete and replace with your project's real triggers):
 
 For a larger feature, chain in this order:
 
-1. `/grill-me` → clarify requirements
+1. `/clarify-requirements` → clarify requirements
 2. `/design` if architectural, else skip
 3. `/plan` → concrete bite-sized tasks
 4. `/tdd` per task → red-green-refactor

@@ -23,7 +23,7 @@ and the architecture is not yet decided.
 
 ---
 
-### Phase 1 — Clarify (use `/grill-me`)
+### Phase 1 — Clarify (use `/clarify-requirements`)
 
 Before touching any code:
 - Identify ambiguities and missing requirements.
@@ -34,7 +34,7 @@ Before touching any code:
 
 ---
 
-### Phase 1.5 — Validate domain (use `/grill-with-docs`) — optional
+### Phase 1.5 — Validate domain (use `/harden-plan`) — optional
 
 Use when the feature introduces new domain terms, changes existing ones, or the design needs stress-testing against `CONTEXT.md`.
 
@@ -107,8 +107,8 @@ The feature is complete when:
 ## Related
 
 - `/design` — Phase 0 detail
-- `/grill-me` — Phase 1 detail
-- `/grill-with-docs` — Phase 1.5 detail
+- `/clarify-requirements` — Phase 1 detail
+- `/harden-plan` — Phase 1.5 detail
 - `/plan` — Phase 2 detail
 - `/tdd` — Phase 3 detail
 - `/verify` — Phase 4 detail

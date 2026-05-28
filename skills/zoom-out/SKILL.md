@@ -80,5 +80,5 @@ Examine each dimension and produce findings ranked by severity (High / Medium / 
 ## Related
 
 - `/plan` — turn a finding into an actionable implementation plan
-- `/grill-me` — clarify constraints before planning structural work
+- `/clarify-requirements` — clarify constraints before planning structural work
 - `/review` — lower-level review for a specific change or PR

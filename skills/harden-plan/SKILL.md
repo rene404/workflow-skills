@@ -1,6 +1,6 @@
 ---
-name: grill-with-docs
-description: Stress-test a plan against the project's domain model — challenge terminology against CONTEXT.md, sharpen fuzzy language, cross-reference with code, and update CONTEXT.md inline as decisions crystallise. Creates ADRs for decisions that are hard-to-reverse, surprising without context, and the result of a real tradeoff. Use when the user has a plan or design to validate, says "grill with docs", or wants to align a design with the existing domain language. Do NOT use before a plan exists — use /grill-me first to clarify requirements.
+name: harden-plan
+description: Stress-test a plan against the project's domain model — challenge terminology against CONTEXT.md, sharpen fuzzy language, cross-reference with code, and update CONTEXT.md inline as decisions crystallise. Creates ADRs for decisions that are hard-to-reverse, surprising without context, and the result of a real tradeoff. Use when the user has a plan or design to validate, says "harden the plan", "pressure-test this plan", "is this aligned with our docs?", or wants to align a design with the existing domain language. Do NOT use before a plan exists — use /clarify-requirements first to clarify requirements.
 ---
 
 ## Purpose
@@ -95,6 +95,6 @@ Create the directory lazily — only when the first ADR is needed.
 
 ## Related
 
-- `/grill-me` — use before this skill to clarify requirements and scope
-- `/design` — use before this skill to produce the plan being grilled
-- `/plan` — next step after grilling; turn the validated design into ordered tasks
+- `/clarify-requirements` — use before this skill to clarify requirements and scope
+- `/design` — use before this skill to produce the plan being hardened
+- `/plan` — next step after hardening; turn the validated plan into ordered tasks

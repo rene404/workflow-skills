@@ -12,7 +12,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); version
 
 - **14 stack-agnostic methodology skills** in `skills/`:
   `plan`, `tdd`, `verify`, `review`, `security-review`, `diagnose`, `design`,
-  `grill-me`, `grill-with-docs`, `new-feature`, `handoff`, `zoom-out`,
+  `clarify-requirements`, `harden-plan`, `new-feature`, `handoff`, `zoom-out`,
   `devops`, `write-skill`.
 - **`using-template`** — router skill template + new-project setup checklist (`NEW-PROJECT-TODO.md`).
 - **Per-harness plugin manifests**: `.claude-plugin/plugin.json` + `marketplace.json`, `.codex-plugin/plugin.json`, `.cursor-plugin/plugin.json`.

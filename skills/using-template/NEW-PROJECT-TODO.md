@@ -66,7 +66,7 @@ Canonical paths in this layout:
 
 ## 3. Skills (`skills/`)
 
-- [ ] Decide which skills to bring over. Sensible defaults: `plan`, `tdd`, `verify`, `review`, `diagnose`, `handoff`. Optional: `design`, `grill-me`, `new-feature`, `security-review`, `zoom-out`.
+- [ ] Decide which skills to bring over. Sensible defaults: `plan`, `tdd`, `verify`, `review`, `diagnose`, `handoff`. Optional: `design`, `clarify-requirements`, `new-feature`, `security-review`, `zoom-out`.
 - [ ] Copy each chosen skill's folder into `skills/`. Edit the frontmatter `description:` if the project's vocabulary differs.
 - [ ] Sanity-check each skill's references to project-specific paths or commands.
 
