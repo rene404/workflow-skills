@@ -15,7 +15,7 @@ This file is the source of truth for agent work in this repository.
 
 - `skills/` — methodology skills (one folder per skill, each containing `SKILL.md` + optional `references/`)
 - `skills/using-template/` — router skill template + `NEW-PROJECT-TODO.md` checklist consumers use to adopt the plugin
-- `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`, `.copilot-plugin/` — per-harness plugin manifests
+- `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/` — per-harness plugin manifests (Copilot CLI reuses the Codex/SDK-standard hook output, no separate manifest folder)
 - `hooks/` — `session-start` (bash), `run-hook.cmd` (polyglot wrapper), `hooks.json` (Claude), `hooks-cursor.json` (Cursor)
 - `README.md` — installation + usage docs
 - `CHANGELOG.md` — releases
@@ -60,7 +60,7 @@ Semver-ish:
 - **Minor (`0.x.0`)** — new skill added, new harness supported
 - **Major (`x.0.0`)** — skill renamed/removed (consumer routers break), hook output format changed, frontmatter schema changed
 
-Bump in `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.copilot-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and `CHANGELOG.md` in one commit. Tag the release.
+Bump in `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and `CHANGELOG.md` in one commit. Tag the release.
 
 ## Workflow
 

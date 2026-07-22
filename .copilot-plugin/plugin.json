@@ -1,0 +1,5 @@
+{
+  "name": "workflow-skills",
+  "version": "0.1.0",
+  "description": "Stack-agnostic methodology skills for coding agents — planning, design, TDD, systematic debugging, verification, code review, security review, handoff."
+}

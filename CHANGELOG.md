@@ -6,6 +6,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); version
 
 ## [Unreleased]
 
+### Fixed
+- `AGENTS.md` was missing Copilot CLI from the harness summary line and repository layout note, even though `README.md` and `hooks/session-start` already supported it via the Codex/SDK-standard JSON shape (no separate `.copilot-plugin/` manifest). Docs are now in sync.
+
 ## [0.1.0] — 2026-05-28
 
 ### Added
