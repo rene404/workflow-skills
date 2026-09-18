@@ -37,7 +37,7 @@ That's a deliberate choice: agent playbooks and reusable prompts in real project
 
 ```sh
 # from a git URL:
-/plugin install workflow-skills@git+https://github.com/reneworndl/workflow-skills.git
+/plugin install workflow-skills@git+https://github.com/rene404/workflow-skills.git
 
 # or from a local checkout (dev marketplace):
 /plugin marketplace add /path/to/workflow-skills
@@ -49,7 +49,7 @@ The SessionStart hook fires on `startup | clear | compact` and injects the route
 ### Codex
 
 ```sh
-codex plugins install workflow-skills@git+https://github.com/reneworndl/workflow-skills.git
+codex plugins install workflow-skills@git+https://github.com/rene404/workflow-skills.git
 ```
 
 For marketplace distribution, see [docs/codex-marketplace.md](docs/codex-marketplace.md) (you submit a PR to OpenAI's `openai-codex-plugins` repo — see [obra/superpowers' sync script](https://github.com/obra/superpowers/blob/main/scripts/sync-to-codex-plugin.sh) for the pattern).
@@ -60,14 +60,14 @@ Add to your project's `.cursor/config`:
 
 ```json
 {
-  "plugins": ["workflow-skills@git+https://github.com/reneworndl/workflow-skills.git"]
+  "plugins": ["workflow-skills@git+https://github.com/rene404/workflow-skills.git"]
 }
 ```
 
 ### Copilot CLI
 
 ```sh
-copilot plugin install workflow-skills@git+https://github.com/reneworndl/workflow-skills.git
+copilot plugin install workflow-skills@git+https://github.com/rene404/workflow-skills.git
 ```
 
 ## Using in a project
@@ -108,7 +108,7 @@ This pattern is borrowed from [obra/superpowers](https://github.com/obra/superpo
 Tagged releases. Consuming projects should pin to a tag (e.g., `v0.1.0`) until you're ready to track changes:
 
 ```
-/plugin install workflow-skills@git+https://github.com/reneworndl/workflow-skills.git#v0.1.0
+/plugin install workflow-skills@git+https://github.com/rene404/workflow-skills.git#v0.1.0
 ```
 
 Breaking changes (skill renames, removed skills) get a major version bump. New skills get a minor bump. Fixes/wording get a patch bump.
