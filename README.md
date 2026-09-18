@@ -2,7 +2,7 @@
 
 Stack-agnostic methodology skills for coding agents — planning, design, TDD, systematic debugging, verification, code review, security review, handoff — plus a workflow router template that maps task descriptions to the smallest combination of skill / agent / prompt / instruction.
 
-Works in Claude Code, Codex, Cursor, and Copilot CLI through per-harness plugin manifests and a single cross-dialect SessionStart hook.
+Works in Claude Code, Codex, Cursor, and Copilot CLI through per-harness plugin manifests and a single cross-dialect SessionStart hook. (Copilot CLI needs no manifest of its own — it reuses the Codex/SDK-standard hook output.)
 
 ## What's in the box
 
@@ -52,7 +52,7 @@ The SessionStart hook fires on `startup | clear | compact` and injects the route
 codex plugins install workflow-skills@git+https://github.com/rene404/workflow-skills.git
 ```
 
-For marketplace distribution, see [docs/codex-marketplace.md](docs/codex-marketplace.md) (you submit a PR to OpenAI's `openai-codex-plugins` repo — see [obra/superpowers' sync script](https://github.com/obra/superpowers/blob/main/scripts/sync-to-codex-plugin.sh) for the pattern).
+For marketplace distribution you submit a PR adding the plugin to OpenAI's `openai-codex-plugins` repo — see [obra/superpowers' sync script](https://github.com/obra/superpowers/blob/main/scripts/sync-to-codex-plugin.sh) for the pattern.
 
 ### Cursor
 

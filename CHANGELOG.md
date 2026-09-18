@@ -6,6 +6,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); version
 
 ## [Unreleased]
 
+### Fixed
+
+- Removed the stray `.copilot-plugin/plugin.json`. It was created by accident in
+  `d3e3c99`, whose own message and changelog entry state that Copilot CLI reuses the
+  Codex/SDK-standard hook output and needs no manifest of its own. The stub carried no
+  `skills` or `hooks` pointer, so it was non-functional regardless.
+- `README.md` linked to `docs/codex-marketplace.md`, which does not exist. The
+  marketplace note is now inline.
+
 ## [0.1.0] — 2026-09-18
 
 ### Added
