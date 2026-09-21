@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Generate a structured handoff document that captures the current state of work so the next session (or another agent) can continue without losing context. Use when the user says "handoff", "I need to stop here", "summarise where we are", "create a handoff", or the session is ending mid-task.
+description: Generate a structured handoff document that captures the current state of work so the next session (or another agent) can continue without losing context. Use when the user says "handoff", "I need to stop here", "summarise where we are", "create a handoff", or the session is ending mid-task. Do NOT use for finished work — use /verify to close it out.
 argument-hint: [optional: topic or branch name]
 ---
 

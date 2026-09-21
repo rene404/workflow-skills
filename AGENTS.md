@@ -28,11 +28,16 @@ This file is the source of truth for agent work in this repository.
    - `name` — kebab-case, matches the folder name
    - `description` — one paragraph. The first sentence is what the agent sees during skill selection. Include concrete trigger phrases the user might say. Include "Do NOT use for X" if there's a close alternative.
 3. Body sections (order matters for readability):
-   - What this skill does (1-2 sentences)
-   - When to use (concrete triggers)
-   - When NOT to use (close alternatives)
-   - The actual methodology / procedure
-   - Anti-patterns
+   - A one-line philosophy or purpose statement — why this procedure exists
+   - The actual methodology / procedure (numbered phases or steps)
+   - Output format, if the skill produces a document or report
+   - Rules and anti-patterns (at least 2-3 explicit ones)
+   - Related — which skills hand off to and from this one
+
+   Triggers and anti-triggers belong in the `description`, not in the body. The
+   description is the only text the agent reads when selecting a skill; repeating
+   the triggers in the body spends context on every load and changes nothing about
+   which skill gets picked.
 4. **No stack references** in the body. If you need an example, use `<migrate>` or "your test runner" not `alembic` or `pytest`.
 5. **Test the skill** in at least one harness before merging. If it doesn't change observable behavior, it doesn't ship.
 

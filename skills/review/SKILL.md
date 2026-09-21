@@ -37,7 +37,7 @@ later dimension changes what the author has to fix.
 
 ### 4. Conventions
 
-- Does the code follow the patterns documented in the project (e.g., `CONTEXT.md`, `AGENTS.md`, language- or framework-specific instructions)?
+- Does the code follow the patterns documented in the project — whichever of `CONTEXT.md`, `AGENTS.md`, or language/framework instruction files exist?
 - Are layer boundaries respected (e.g., routes thin, business logic in services, DAO/ORM not leaking into the transport layer)?
 - Are request/response schemas distinct from internal/persistence models?
 - Is the naming consistent with existing code?

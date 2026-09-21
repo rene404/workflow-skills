@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: Test-driven development using red-green-refactor. Write a failing test first, implement the minimum code to make it pass, then refactor. Use when the user wants to build a feature with TDD, says "test first", mentions "red-green-refactor", or wants to drive implementation from tests. Do NOT use when fixing a bug that already has a failing test — use /diagnose instead.
+description: Test-driven development using red-green-refactor. Write a failing test first, implement the minimum code to make it pass, then refactor. Use when the user wants to build a feature with TDD, says "test first", mentions "red-green-refactor", or wants to drive implementation from tests. Do NOT use when you don't yet know why something fails — use /diagnose to find the cause first, then return here to drive the fix.
 ---
 
 ## Philosophy

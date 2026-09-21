@@ -1,6 +1,6 @@
 ---
 name: zoom-out
-description: Architecture health review — examine the codebase for coupling, complexity, tech debt, and structural drift. Produces an honest assessment with prioritised observations. Use when the user asks for a code health check, architecture review, "what's the tech debt?", "is the structure good?", or before a major refactor. Read-only — does not make changes.
+description: Architecture health review — examine the codebase for coupling, complexity, tech debt, and structural drift. Produces an honest assessment with prioritised observations. Use when the user asks for a code health check, architecture review, "what's the tech debt?", "is the structure good?", or before a major refactor. Read-only — does not make changes. Do NOT use to review a single diff or PR — use /review.
 ---
 
 ## Philosophy
@@ -44,7 +44,7 @@ Examine each dimension and produce findings ranked by severity (High / Medium / 
 
 ### 6. Drift
 
-- Does the current structure match what `CONTEXT.md` and `AGENTS.md` describe?
+- Does the current structure match what `CONTEXT.md` and `AGENTS.md` describe (skip whichever the project doesn't have)?
 - Are there abandoned patterns, dead code, or modules that no longer fit?
 
 ## Output format

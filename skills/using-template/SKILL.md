@@ -1,6 +1,6 @@
 ---
 name: using-template
-description: Workflow router TEMPLATE for projects that install the workflow-skills plugin. Maps task descriptions to the smallest combination of skill / agent / prompt / instruction needed to do the work. This file is intentionally generic — copy it to a project as `skills/using-<project>/SKILL.md` and fill in the "Project routes" table with that project's real paths. Read-only — does not execute work itself.
+description: Workflow router TEMPLATE for projects that install the workflow-skills plugin. Maps task descriptions to the smallest combination of skill / agent / prompt / instruction needed to do the work. This file is intentionally generic — copy it to a project as `skills/using-<project>/SKILL.md` and fill in the "Project routes" table with that project's real paths. Read-only — does not execute work itself. Do NOT invoke this template as-is in a project that has its own `using-<project>` router — that one has the real routes.
 ---
 
 <!--

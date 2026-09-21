@@ -23,7 +23,8 @@ No "TBD", no "as needed", no vague descriptions. If you can't write a specific f
 ### 1. Understand before planning
 
 - Read the relevant files. Do not plan from memory.
-- Check `CONTEXT.md` for domain vocabulary.
+- Check `CONTEXT.md` for domain vocabulary, if the project has one — it is created
+  lazily by `/harden-plan`, so many projects won't.
 - If requirements are ambiguous, run `/clarify-requirements` first.
 
 ### 2. Identify the smallest safe change

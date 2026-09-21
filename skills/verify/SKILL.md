@@ -1,6 +1,6 @@
 ---
 name: verify
-description: Run fresh, end-to-end verification before declaring any task complete. Re-run all tests, confirm observable behaviour, and check for regressions. Use when the user says "are we done?", "does this work?", "verify the changes", or before closing a feature branch. Never skip this because "the tests were passing earlier" — always run fresh.
+description: Run fresh, end-to-end verification before declaring any task complete. Re-run all tests, confirm observable behaviour, and check for regressions. Use when the user says "are we done?", "does this work?", "verify the changes", or before closing a feature branch. Never skip this because "the tests were passing earlier" — always run fresh. Do NOT use to investigate why something fails — use /diagnose.
 ---
 
 ## Rule

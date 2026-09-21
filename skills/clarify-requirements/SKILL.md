@@ -14,7 +14,8 @@ changing course is cheap.
 ### 1. Read first
 
 Before asking anything:
-- Read `CONTEXT.md` to understand domain vocabulary.
+- Read `CONTEXT.md` to understand domain vocabulary, if the project has one — it is
+  created lazily by `/harden-plan`, so its absence is normal, not a blocker.
 - Identify what you know vs. what you're assuming.
 - List your assumptions internally — those become the clarifying questions.
 
