@@ -101,7 +101,7 @@ If only verification and review remain: start at Phase 5.
 
 The feature is complete when:
 - [ ] All plan tasks are committed
-- [ ] Full test suite passes (`pytest -q`, `npm test`, `npm run typecheck`)
+- [ ] Full test suite passes, plus typecheck/lint if the project has them
 - [ ] Observable behaviour is confirmed
 - [ ] Review verdict is APPROVE
 

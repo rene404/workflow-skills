@@ -48,7 +48,7 @@ Repeat for each small, vertical slice of behaviour:
 ## Verification gate
 
 Before declaring a slice done:
-1. Run the full test suite fresh (`pytest -q` or `docker compose exec backend pytest -q`).
+1. Run the full test suite fresh, using the project's documented command (host or container — match how the project actually runs it).
 2. All tests pass.
 3. No tests were skipped or suppressed.
 4. Commit the slice.

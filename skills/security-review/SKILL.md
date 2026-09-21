@@ -29,7 +29,7 @@ Examine each area. Report every finding — do not filter by likelihood.
 ### 3. Injection
 
 - Is any user input used in a raw SQL query, ORM `.execute()`, or `text()` without parameterisation?
-- Is any user input used in a shell command (`subprocess`, `os.system`)?
+- Is any user input passed to a shell or process-exec API, or to an `eval`-style construct?
 - Is any user input interpolated into a file path without sanitisation?
 - Is any user input rendered as HTML without escaping?
 

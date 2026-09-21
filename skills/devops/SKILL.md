@@ -1,6 +1,6 @@
 ---
 name: devops
-description: Methodology for safely changing infrastructure, CI/CD pipelines, Docker/Compose configuration, environment/secrets setup, and deployment rollout. Use when the user is modifying docker-compose.yml, Dockerfiles, GitHub Actions workflows, environment variables, deployment scripts, or asking about rollout strategy. Do NOT use for application code changes — use /plan + /tdd for those.
+description: Methodology for safely changing infrastructure, CI/CD pipelines, container configuration, environment/secrets setup, and deployment rollout. The worked examples use Docker Compose and GitHub Actions; the procedure applies to any container runtime or CI provider. Use when the user is modifying compose files, Dockerfiles, CI workflow definitions, environment variables, deployment scripts, or asking about rollout strategy. Do NOT use for application code changes — use /plan + /tdd for those.
 ---
 
 ## Philosophy
@@ -11,11 +11,14 @@ defined before rollout begins.
 
 ## Domains
 
-Apply the relevant sections for the type of change being made.
+Apply the relevant sections for the type of change being made. The commands below
+are written for Docker Compose and GitHub Actions because they need to be concrete —
+translate them to your runtime and CI provider. The *sequence* is the methodology;
+the exact binary is not.
 
 ---
 
-### Docker / Compose changes
+### Container / Compose changes
 
 **Before changing:**
 - Identify which services are affected and their dependencies.
@@ -36,7 +39,7 @@ docker compose logs --tail=50  # check for startup errors
 
 ---
 
-### CI/CD pipeline changes (GitHub Actions)
+### CI/CD pipeline changes (examples: GitHub Actions)
 
 **Before changing:**
 - Identify the trigger (push, PR, schedule, manual) and confirm the change matches the intent.
@@ -56,6 +59,8 @@ docker compose logs --tail=50  # check for startup errors
 | Workflow runs on wrong branch | `branches:` filter too narrow or too wide |
 | Build passes locally, fails CI | Missing env var or different runner OS |
 
+The same four failure modes appear on every CI provider; only the syntax changes.
+
 ---
 
 ### Secrets / environment configuration
@@ -68,7 +73,7 @@ docker compose logs --tail=50  # check for startup errors
 **Checklist for a new env var:**
 - [ ] Added to `.env.example` with a descriptive comment
 - [ ] Documented in README under Environment Variables
-- [ ] Consumed in code via `os.getenv()` / config layer — not hardcoded
+- [ ] Read through the project's config layer or env accessor — never hardcoded
 - [ ] Has a safe default if optional, or raises clearly at startup if required
 
 ---
@@ -100,7 +105,8 @@ docker compose logs --tail=50  # check for startup errors
 
 - If infrastructure changes require application code changes too, use `/plan` to coordinate both.
 - If a CI failure needs debugging, use `/diagnose` on the pipeline output.
-- If the change is ready for release, hand off to the Release Manager agent.
+- If the change is ready for release, follow the project's release process — this skill
+  covers the change, not the sign-off.
 
 ## Related
 

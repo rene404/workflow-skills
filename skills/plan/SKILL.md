@@ -10,7 +10,7 @@ Produce a numbered checklist. Each task must have:
 ```
 ### N. [Task title]
 
-**Files:** `path/to/file.py`, `path/to/test_file.py`
+**Files:** `path/to/source`, `path/to/test`
 **What:** [One sentence — exactly what changes]
 **Command:** [Exact verification command]
 **Done when:** [Observable, binary condition]

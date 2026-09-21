@@ -14,14 +14,17 @@ Run these in order. Report results for each.
 
 ### 1. Full test suite
 
-```bash
-# Backend
-docker compose exec backend pytest -q
+Run the project's own commands — substitute the real ones:
 
-# Frontend (if frontend was touched)
-docker compose exec frontend npm test
-docker compose exec frontend npm run typecheck
+```bash
+<test-runner>          # the full suite, not a filtered subset
+<typecheck>            # if the language has a separate type check
+<lint>                 # if the project gates on it
 ```
+
+Take these from the project's `AGENTS.md`, `README.md`, or CI config. If no command
+is documented anywhere, ask — do not guess a runner, and do not assume the suite runs
+on the host if the project runs it inside a container.
 
 All tests must pass. No skipped tests that weren't already skipped before your change.
 
