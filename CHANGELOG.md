@@ -6,6 +6,26 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); version
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-09-21
+
+### Changed
+
+- **The SessionStart hook no longer injects `using-template`.** It now looks for a
+  project-local router at `skills/using-<project>/SKILL.md` or
+  `.claude/skills/using-<project>/SKILL.md` and injects that in full; when a project
+  has none, it injects a slim fallback naming the available skills and the standard
+  chain. Previously every session — customised or not — received the 6.8 KB template
+  whose routing table is a single placeholder row, so uncustomised installs paid full
+  context cost for a table that routed nothing. A project with its own router gets the
+  same behaviour as before; one without drops from ~6,820 to ~961 characters.
+
+  Minor rather than patch: the injected content changes for every consumer. The JSON
+  output shape per harness is unchanged.
+- **`design` states its shape assumption.** Its output template assumes a networked
+  service over a relational store; the description now says so and tells the reader to
+  map the headings to public surface / persisted state / compatibility for a CLI or
+  library. The body is unchanged.
+
 ## [0.1.1] — 2026-09-21
 
 ### Fixed

@@ -92,7 +92,12 @@ Then work through `NEW-PROJECT-TODO.md`. It walks you through:
 
 `hooks/session-start` is a single bash script that:
 
-1. Reads the `using-template/SKILL.md` (the router) from this plugin
+1. Looks for a project-local router at `skills/using-<project>/SKILL.md` or
+   `.claude/skills/using-<project>/SKILL.md`. If one exists, it injects that router in
+   full — it has the concrete routes for that codebase. If not, it injects a slim
+   fallback naming the available skills and the standard chain. The plugin's own
+   `using-template` is never injected: its routing table is an empty placeholder, so
+   shipping it into every session would cost context and route nothing.
 2. Detects which harness is invoking it via env vars (`CURSOR_PLUGIN_ROOT`, `CLAUDE_PLUGIN_ROOT`, `COPILOT_CLI`)
 3. Emits the JSON shape that harness expects:
    - Cursor → `additional_context` (snake_case top-level)

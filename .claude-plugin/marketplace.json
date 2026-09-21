@@ -8,7 +8,7 @@
     {
       "name": "workflow-skills",
       "description": "Methodology skills for coding agents: planning, design, TDD, debugging, verification, review, handoff",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "source": "./",
       "author": {
         "name": "René Wörndl"

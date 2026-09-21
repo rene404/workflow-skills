@@ -1,6 +1,6 @@
 {
   "name": "workflow-skills",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Methodology skills for coding agents — planning, design, TDD, systematic debugging, verification, code review, handoff. Stack-agnostic; pairs with project-local agents/prompts/instructions via a router template.",
   "author": {
     "name": "René Wörndl"

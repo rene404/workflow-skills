@@ -1,6 +1,6 @@
 ---
 name: design
-description: Produce a minimal technical design before any planning or coding begins. Defines endpoint contracts, data model changes, auth/permissions, migration strategy, and test strategy. Use when the user describes a feature that needs architectural decisions first, says "design this", "how should we structure this?", or the change touches the data model, auth, or multiple system layers. Do NOT write code or a plan — output a design and hand off to /plan.
+description: Produce a minimal technical design before any planning or coding begins. Defines endpoint contracts, data model changes, auth/permissions, migration strategy, and test strategy. The output template assumes a networked service over a relational store; for a CLI, library, or other shape, read those headings as public surface, persisted state, and compatibility. Use when the user describes a feature that needs architectural decisions first, says "design this", "how should we structure this?", or the change touches the data model, auth, or multiple system layers. Do NOT write code or a plan — output a design and hand off to /plan.
 ---
 
 ## Philosophy
