@@ -10,7 +10,9 @@ would affect correctness, maintainability, or safety in production.
 
 ## Dimensions
 
-Examine in this order. Stop and flag immediately if a High finding is found.
+Examine in this order. Work through all five dimensions even when a High finding
+turns up early — the verdict needs the complete picture, and a second High in a
+later dimension changes what the author has to fix.
 
 ### 1. Correctness
 

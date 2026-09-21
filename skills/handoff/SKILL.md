@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Generate a structured handoff document that captures the current state of work so the next session (or another agent) can continue without losing context. Use when the user says "handoff", "I need to stop here", "summarise where we are", "create a handoff", or the session is ending mid-task. Argument hint: optional topic or branch name to scope the handoff.
+description: Generate a structured handoff document that captures the current state of work so the next session (or another agent) can continue without losing context. Use when the user says "handoff", "I need to stop here", "summarise where we are", "create a handoff", or the session is ending mid-task.
 argument-hint: [optional: topic or branch name]
 ---
 
@@ -13,7 +13,7 @@ five minutes of the next session.
 
 Produce a handoff document with these sections:
 
-```markdown
+~~~markdown
 # Handoff — [topic or branch] — [date]
 
 ## What we were doing
@@ -43,20 +43,21 @@ Produce a handoff document with these sections:
 [Exact commands to get back to a working state]
 ```bash
 git checkout [branch]
-docker compose up -d
-# [any other setup steps]
+# [the project's setup steps — start services, install deps, seed data]
 ```
 
 ## Files to read first
 - `[path]` — [why this file is important to the task]
-```
+~~~
 
 ## Rules
 
 - Be specific. Vague handoffs waste more time than no handoff.
 - List exact file paths, branch names, and commands — not descriptions.
 - If there are unresolved questions, list them explicitly.
-- Do not include information that can be derived from `git log` or reading the code.
+- Do not re-narrate what `git log` or the code already says. Identifiers that anchor
+  the reader — commit hash, branch, file paths — are wanted; a prose summary of the
+  commit history is not.
 
 ## Related
 
