@@ -1,7 +1,7 @@
 {
   "name": "workflow-skills",
   "description": "Methodology skills for coding agents: planning, design, TDD, debugging, verification, review, handoff. Plus a router template that maps task descriptions to the smallest combination of skill/agent/prompt/instruction needed.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "René Wörndl"
   },
