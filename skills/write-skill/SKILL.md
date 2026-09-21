@@ -1,6 +1,6 @@
 ---
 name: write-skill
-description: Create a new skill following the project's skill conventions — correct frontmatter, SKILL.md structure, and plugin.json registration. Use when the user wants to add a new skill, says "write a skill for X", or needs to capture a repeatable workflow as a reusable skill. Do NOT use for one-time operations, project-specific scripts, or workflows already covered by an existing skill.
+description: Create a new skill following the project's skill conventions — correct frontmatter, SKILL.md structure, flat directory layout, and the README/CHANGELOG updates a new skill requires. Use when the user wants to add a new skill, says "write a skill for X", or needs to capture a repeatable workflow as a reusable skill. Do NOT use for one-time operations, project-specific scripts, or workflows already covered by an existing skill.
 ---
 
 ## When to create a skill
@@ -67,18 +67,24 @@ argument-hint: [optional — what argument the user can pass]
 - `/skill-name` — [relationship]
 ```
 
-### 4. Create the directory and register
+### 4. Create the directory
 
 ```
-skills/[category]/[skill-name]/SKILL.md
+skills/[skill-name]/SKILL.md
 ```
 
-Categories: `engineering`, `productivity`, `workflow`
+The layout is flat — one directory per skill, no category folders. Supporting
+files (formats, templates, references) live beside `SKILL.md` in the same folder.
 
-Add the path to `plugin.json`:
-```json
-"./skills/[category]/[skill-name]"
-```
+**No manifest edit is needed.** Claude Code discovers `skills/` automatically, so
+`.claude-plugin/plugin.json` carries no `skills` key at all. The Codex and Cursor
+manifests point at the *directory* once (`"skills": "./skills/"`) — they never list
+individual skills. Adding a per-skill path to any manifest is a bug, not a step.
+
+What does need updating when a skill is added:
+- `README.md` — the skill list under "What's in the box"
+- `CHANGELOG.md` — an entry under `[Unreleased]`
+- the version in all four manifests, if you are cutting a release (see `AGENTS.md`)
 
 ### 5. Test the description
 
@@ -94,8 +100,9 @@ would I know exactly when to use this skill and when not to?" If no, rewrite.
 - [ ] SKILL.md has numbered phases or steps
 - [ ] SKILL.md has at least 2 anti-pattern rules
 - [ ] SKILL.md has a "Related" section
-- [ ] Directory created under correct category
-- [ ] `plugin.json` updated with new path
+- [ ] Directory created at `skills/[skill-name]/` (flat — no category folder)
+- [ ] `README.md` skill list updated
+- [ ] `CHANGELOG.md` entry added under `[Unreleased]`
 
 ## Related
 
