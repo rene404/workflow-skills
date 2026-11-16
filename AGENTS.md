@@ -47,7 +47,7 @@ This file is the source of truth for agent work in this repository.
 1. Add a manifest at `.<harness>-plugin/plugin.json`. Follow that harness's conventions for the manifest shape.
 2. Add a hook output branch to `hooks/session-start` that matches the harness's env var (`<HARNESS>_PLUGIN_ROOT` or similar) and emits the JSON shape that harness expects.
 3. Add a `hooks/hooks-<harness>.json` if the harness uses a separate config file.
-4. **Acceptance test**: open a clean session in the new harness, send `"plan a new feature for me"`, confirm `/plan` auto-triggers and the user is asked clarifying questions before any code is written.
+4. **Acceptance test**: open a clean session in the new harness, send `"plan a new feature for me"`, confirm the `plan` skill auto-triggers (`/workflow-skills:plan` in Claude Code, where plugin skills are namespaced) and the user is asked clarifying questions before any code is written.
 5. Update `README.md` install section.
 
 ## What not to add

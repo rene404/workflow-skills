@@ -1,6 +1,7 @@
 : << 'CMDBLOCK'
 @echo off
 REM Cross-platform polyglot wrapper for hook scripts.
+REM Adapted from obra/superpowers (MIT, Copyright (c) 2025 Jesse Vincent).
 REM On Windows: cmd.exe runs the batch portion, which finds and calls bash.
 REM On Unix: the shell interprets this as a script (: is a no-op in bash).
 REM

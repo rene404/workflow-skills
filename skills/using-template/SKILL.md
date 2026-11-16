@@ -1,6 +1,6 @@
 ---
 name: using-template
-description: Workflow router TEMPLATE for projects that install the workflow-skills plugin. Maps task descriptions to the smallest combination of skill / agent / prompt / instruction needed to do the work. This file is intentionally generic — copy it to a project as `.claude/skills/using-<project>/SKILL.md` and fill in the "Project routes" table with that project's real paths. Read-only — does not execute work itself. Do NOT invoke this template as-is in a project that has its own `using-<project>` router — that one has the real routes.
+description: Workflow router TEMPLATE for projects that install the workflow-skills plugin. Maps task descriptions to the smallest combination of skill / agent / prompt / instruction needed to do the work. This file is intentionally generic — copy it to a project as `.claude/skills/using-<project>/SKILL.md` and fill in the "Project routes" table with that project's real paths. Use at the start of any non-trivial change: when the user describes a task without naming a skill, asks for broad "help with X", or a handoff lands on an unfamiliar request — once per task, not mid-task. Read-only — does not execute work itself. Do NOT invoke this template as-is in a project that has its own `using-<project>` router — that one has the real routes.
 ---
 
 <!--
@@ -36,23 +36,12 @@ To use in a project:
 
 A workflow router maps a task description to the smallest combination of artifacts that satisfies it. A typical project using this plugin has up to four kinds of agent-facing artifacts:
 
-- **Claude Code skills** — invoked via the Skill tool. Some ship from the `workflow-skills` plugin (e.g., `/plan`, `/tdd`, `/review`); others are project-local in `.claude/skills/` or `skills/`.
+- **Claude Code skills** — invoked via the Skill tool. Some ship from the `workflow-skills` plugin (e.g., `/plan`, `/tdd`, `/review`); others are project-local in `.claude/skills/`. Plugin skills are namespaced in Claude Code: `/plan` here means `/workflow-skills:plan`.
 - **Agent playbooks** in `agents/*.agent.md` — role-specific procedures (planner, builder, debugger, etc.). Project-defined.
 - **Reusable prompts** in `prompts/*.prompt.md` — named starter prompts for repeating tasks (e.g., add-endpoint, bugfix-from-trace). Project-defined.
 - **Scoped instructions** in `.github/instructions/*.instructions.md` — file-scoped Copilot-style rules. Project-defined.
 
 `AGENTS.md` and the instructions files remain authoritative for the rules — this router only picks which tools execute the rules.
-
-## When to use this skill
-
-At the start of any non-trivial change. Triggers:
-
-- The user describes a new task without naming an artifact
-- The user asks for "help with X" where X is broad
-- You're about to pick a skill or agent and want to confirm the smallest set
-- A handoff lands you on an unfamiliar request
-
-Do NOT reload this skill mid-task. Pick once, execute.
 
 ## Project routes <!-- ← edit this section per project -->
 
@@ -88,11 +77,12 @@ For a larger feature, chain in this order:
 
 1. `/clarify-requirements` → clarify requirements
 2. `/design` if architectural, else skip
-3. `/plan` → concrete bite-sized tasks
-4. `/tdd` per task → red-green-refactor
-5. `/verify` → fresh end-to-end check
-6. `/review` (or `/security-review` if sensitive code)
-7. `/handoff` if stopping mid-feature
+3. `/harden-plan` if domain terms or past decisions are at stake, else skip
+4. `/plan` → concrete bite-sized tasks
+5. `/tdd` per task → red-green-refactor
+6. `/verify` → fresh end-to-end check
+7. `/review` (or `/security-review` if sensitive code)
+8. `/handoff` if stopping mid-feature
 
 `/new-feature` orchestrates this end-to-end if you want one entry point.
 

@@ -2,7 +2,7 @@
 
 Drop this file into a fresh project and work through it top-to-bottom. Delete the file when every box is checked.
 
-The end state matches the rene404 setup: AGENTS.md is authoritative, CLAUDE.md is a thin adapter, one router skill (`using-<project>`) maps task triggers to the smallest combination of skill / agent / prompt / instruction, and plugin manifests let Claude Code AND Codex (and Cursor / Copilot CLI) bootstrap the same router.
+The end state: AGENTS.md is authoritative, CLAUDE.md is a thin adapter, one router skill (`using-<project>`) maps task triggers to the smallest combination of skill / agent / prompt / instruction, and plugin manifests let Claude Code AND Codex (and Cursor / Copilot CLI) bootstrap the same router.
 
 Canonical paths in this layout:
 
@@ -57,7 +57,7 @@ Canonical paths in this layout:
   - [ ] Replace the "Project routes" table with your real triggers → artifact paths
   - [ ] Trim the "Concepts" bullet list to only the artifact kinds you actually use
   - [ ] Update "Multi-stage chains" with skills you actually have. Drop steps you don't.
-  - [ ] Keep "When to use this skill", "Rules", "Anti-patterns" sections as-is
+  - [ ] Keep the "Rules" and "Anti-patterns" sections as-is
   - [ ] Remove the "Adapting to another project" footer (you've already done it)
 - [ ] If the router lives in top-level `skills/`, create the `.claude/skills/ → ../skills/` symlink so Claude Code can discover it:
   - [ ] `mkdir -p .claude && cd .claude && ln -s ../skills skills && cd ..`
@@ -98,11 +98,11 @@ Skip if you opted out. Note: these are advisory — Claude Code does not auto-lo
 
 This is what makes the same routing work across Claude Code, Codex, Cursor, and Copilot CLI.
 
-- [ ] `.claude-plugin/plugin.json` — minimal Claude Code plugin manifest (`name`, `description`, `version`, repo metadata). Copy from rene404 and rename.
+- [ ] `.claude-plugin/plugin.json` — minimal Claude Code plugin manifest (`name`, `description`, `version`, repo metadata). Copy from the workflow-skills plugin and rename.
 - [ ] `.claude-plugin/marketplace.json` — local marketplace stub so you can `/plugin install <slug>@<slug>-dev` from this checkout. Update `name`, `owner`, and the inner plugin entry.
 - [ ] `.codex-plugin/plugin.json` — Codex marketplace listing. Includes an `interface` block (displayName, brandColor, defaultPrompt) for the Codex marketplace UI. Update slug, description, brand color, default prompts.
 - [ ] `.cursor-plugin/plugin.json` (only if supporting Cursor) — Cursor's manifest with `skills`, `agents`, `commands`, `hooks` paths.
-- [ ] `hooks/session-start` — bash hook that injects the router at session start. Copy from rene404; the only edit needed is the path to your router skill (`skills/using-<slug>/SKILL.md`).
+- [ ] `hooks/session-start` — bash hook that injects the router at session start. Copy from the workflow-skills plugin; it finds `using-<slug>` on its own (`.claude/skills/` first, then `skills/`, walking up to the git root). Adjust only the fallback text if you like.
 - [ ] `hooks/run-hook.cmd` — polyglot bash/.cmd wrapper for Windows. Copy verbatim.
 - [ ] `hooks/hooks.json` — Claude Code SessionStart registration. Copy verbatim.
 - [ ] `chmod +x hooks/session-start hooks/run-hook.cmd`

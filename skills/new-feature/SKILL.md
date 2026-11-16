@@ -61,11 +61,11 @@ Use when the feature introduces new domain terms, changes existing ones, or the 
 ### Phase 4 — Implement (use `/tdd`)
 
 Execute the plan task by task using red-green-refactor:
-- Write failing test → implement minimum → refactor → commit.
-- One task, one commit.
-- Do not implement task N+1 until task N is committed and green.
+- Write failing test → implement minimum → refactor → ready to commit.
+- One task, one commit. Commit only if the user or project has authorised it; otherwise keep each task as a separately reviewable change and tell the user it is ready.
+- Do not implement task N+1 until task N is green and ready to commit.
 
-**Gate:** All plan tasks are committed and the full test suite is green. → Proceed to Phase 5.
+**Gate:** All plan tasks are done (committed, or ready to commit) and the full test suite is green. → Proceed to Phase 5.
 
 ---
 
@@ -100,7 +100,7 @@ If only verification and review remain: start at Phase 5.
 ## Exit condition
 
 The feature is complete when:
-- [ ] All plan tasks are committed
+- [ ] All plan tasks are done (committed, or ready to commit if committing is not authorised)
 - [ ] Full test suite passes, plus typecheck/lint if the project has them
 - [ ] Observable behaviour is confirmed
 - [ ] Review verdict is APPROVE

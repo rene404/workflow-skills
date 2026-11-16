@@ -146,4 +146,5 @@ MIT — see [LICENSE](LICENSE).
 
 ## Acknowledgements
 
-Heavily inspired by [obra/superpowers](https://github.com/obra/superpowers). The cross-harness hook pattern, the marketplace structure, and the "skills as behavior-shaping markdown" philosophy all come from there.
+- [obra/superpowers](https://github.com/obra/superpowers) (MIT, Copyright (c) 2025 Jesse Vincent): the cross-harness hook pattern (`hooks/run-hook.cmd` is adapted from it), the marketplace structure, and the "skills as behavior-shaping markdown" philosophy.
+- [mattpocock/skills](https://github.com/mattpocock/skills) (MIT, Copyright (c) 2026 Matt Pocock): `harden-plan` adapts the `grill-me` interview prompt and the `grill-with-docs` / `domain-modeling` approach: `CONTEXT.md` as a lazily created glossary and the three criteria for when a decision earns an ADR.

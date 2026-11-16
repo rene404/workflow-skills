@@ -6,7 +6,7 @@ description: Test-driven development using red-green-refactor. Write a failing t
 ## Philosophy
 
 If you didn't watch the test fail, you don't know if it tests the right thing.
-Every task produces a passing test suite and a commit. No exceptions.
+Every task ends with a passing test suite and a change small enough to be one commit. No exceptions.
 
 ## Cycle
 
@@ -28,12 +28,12 @@ Repeat for each small, vertical slice of behaviour:
 
 - Improve structure, naming, and clarity.
 - Run the full suite again. Still green.
-- Commit: one logical slice per commit.
+- The slice is now ready to commit: one logical slice per commit. Commit it if the user or project has authorised you to commit; otherwise say it is ready and move on.
 
 ## Slicing rules
 
-- Vertical slices: each slice adds end-to-end behaviour (route → service → DB → response).
-- Never horizontal slices (all routes first, then all services, then all tests).
+- Vertical slices: each slice adds end-to-end behaviour through every layer it touches (e.g. input → logic → storage → output).
+- Never horizontal slices (one whole layer first, then the next, then all tests).
 - If a slice feels too large, split it before writing any code.
 
 ## Anti-patterns

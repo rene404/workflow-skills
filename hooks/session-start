@@ -92,7 +92,7 @@ fi
 if [ -z "${body:-}" ]; then
     body="Pick the smallest set of skills that satisfies the request before starting any non-trivial task. A single skill is enough for most asks.
 
-Available skills: /plan, /tdd, /verify, /review, /security-review, /diagnose, /design, /clarify-requirements, /harden-plan, /new-feature, /handoff, /zoom-out, /devops, /write-skill.
+Available skills: /plan, /tdd, /verify, /review, /security-review, /diagnose, /design, /clarify-requirements, /harden-plan, /new-feature, /handoff, /zoom-out, /devops, /write-skill. Where the harness namespaces plugin skills (Claude Code), these are /workflow-skills:plan, /workflow-skills:tdd, and so on.
 
 For a larger feature, chain: /clarify-requirements -> /design (if architectural) -> /harden-plan (if domain terms are at stake) -> /plan -> /tdd per task -> /verify -> /review. /new-feature orchestrates this end-to-end from one entry point.
 

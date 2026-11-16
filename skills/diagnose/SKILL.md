@@ -40,9 +40,9 @@ Run each phase in order. Do not skip ahead.
 ### 6. Regression test
 
 - Write a test that would have caught this bug.
-- Confirm it fails on the unfixed code (or verify the condition conceptually).
+- Run it against the unfixed code (before applying the fix, or with the fix temporarily reverted) and watch it fail. A test you never saw fail is not a regression test; if it cannot be made to fail, say so.
 - Confirm it passes on the fixed code.
-- Commit: fix + regression test together.
+- Fix and regression test belong in one commit. Commit only if the user or project has authorised it; otherwise say it is ready.
 
 ## Hard rules
 

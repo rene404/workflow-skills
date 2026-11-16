@@ -19,7 +19,7 @@ later dimension changes what the author has to fix.
 - Does the code do what the task/PR description says it does?
 - Are there off-by-one errors, wrong types, incorrect conditions?
 - Are error cases handled? What happens on unexpected input?
-- Are DB operations transactional where they need to be?
+- Are multi-step state changes atomic where a partial failure would leave inconsistent data (transactions, or the equivalent for your storage)?
 
 ### 2. Tests
 
@@ -30,23 +30,22 @@ later dimension changes what the author has to fix.
 
 ### 3. Security
 
-- Is any user input used in a DB query, shell command, or file path without sanitisation?
+- Is any user input used in a query, shell command, or file path without parameterisation or sanitisation?
 - Are secrets, tokens, or credentials logged or returned in responses?
-- Are auth checks applied consistently on new routes?
-- Does a 401 vs 403 distinction matter here and is it correct?
+- Are auth checks applied consistently on new entry points?
 
 ### 4. Conventions
 
 - Does the code follow the patterns documented in the project — whichever of `CONTEXT.md`, `AGENTS.md`, or language/framework instruction files exist?
-- Are layer boundaries respected (e.g., routes thin, business logic in services, DAO/ORM not leaking into the transport layer)?
-- Are request/response schemas distinct from internal/persistence models?
+- Are the project's layer boundaries respected (e.g., entry points thin, core logic not depending on I/O or framework details)?
+- Are external contracts (API payloads, file formats, CLI output) kept separate from internal data structures where the project requires it?
 - Is the naming consistent with existing code?
 
 ### 5. Migrations (if applicable)
 
-- Does the migration have both `upgrade` and `downgrade`?
-- Is the downgrade safe (no data loss for a simple rollback)?
-- Was the migration tested up/down/up?
+- Can the migration be rolled back (a reverse step, or a documented reason why not)?
+- Is the rollback safe (no data loss for a simple rollback)?
+- Was the migration tested apply → roll back → apply?
 
 ## Output format
 

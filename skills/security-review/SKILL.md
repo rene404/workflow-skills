@@ -21,14 +21,14 @@ Examine each area. Report every finding — do not filter by likelihood.
 
 ### 2. Authentication and authorisation
 
-- Are all protected routes enforcing auth via a dependency — not inline?
-- Is the 401 vs 403 distinction correct? (401 = not authenticated, 403 = not authorised)
+- Is auth enforced in one shared place (middleware, guard, decorator, policy layer) that every protected entry point goes through — not re-implemented inline per handler?
+- Are "not authenticated" and "not authorised" kept distinct where the interface exposes them (e.g. HTTP 401 vs 403)?
 - Can a lower-privilege caller reach a higher-privilege resource by manipulating IDs or parameters?
 - Are auth decisions based on verified data (DB lookup) not unverified input (e.g., a user-supplied role claim)?
 
 ### 3. Injection
 
-- Is any user input used in a raw SQL query, ORM `.execute()`, or `text()` without parameterisation?
+- Is any user input concatenated into a query (SQL or otherwise), including through the ORM's raw-query escape hatches, instead of being passed as a bound parameter?
 - Is any user input passed to a shell or process-exec API, or to an `eval`-style construct?
 - Is any user input interpolated into a file path without sanitisation?
 - Is any user input rendered as HTML without escaping?

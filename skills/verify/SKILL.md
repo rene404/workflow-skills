@@ -41,15 +41,13 @@ All tests must pass. No skipped tests that weren't already skipped before your c
 
 ### 4. Migration check (schema changes only)
 
-Run the project's migration up → down → up cycle (substitute the relevant tool — Alembic, Flyway, Prisma, etc.):
+Run the project's migration cycle with whatever tool it uses:
 
-```bash
-<migrate> upgrade head
-<migrate> downgrade -1
-<migrate> upgrade head
-```
+1. Apply all migrations.
+2. Roll back the newest one.
+3. Apply again.
 
-Up/down/up must succeed without errors.
+All three steps must succeed without errors. If the migration is deliberately irreversible, say so and skip step 2.
 
 ### 5. No uncommitted changes
 

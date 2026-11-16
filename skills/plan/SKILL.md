@@ -38,7 +38,7 @@ No "TBD", no "as needed", no vague descriptions. If you can't write a specific f
 - Tasks must be **vertical slices** — each slice adds working, tested behaviour.
 - Maximum 8 tasks per plan. If more are needed, split into phases.
 - Include a migration task if any schema changes are required.
-- Include a test task for every behaviour-changing task.
+- Every behaviour-changing task includes its own test. No separate "write the tests" task: that is a horizontal slice.
 
 ### 4. Present and wait
 
@@ -52,7 +52,7 @@ No "TBD", no "as needed", no vague descriptions. If you can't write a specific f
 - [ ] Every task has a specific verification command
 - [ ] Tasks are ordered by dependency (no task assumes a later task is done)
 - [ ] Schema changes have a migration task
-- [ ] Behaviour changes have a test task
+- [ ] Every behaviour-changing task names the test that covers it
 - [ ] No task is vague or deferred with "TBD"
 
 ## Related
