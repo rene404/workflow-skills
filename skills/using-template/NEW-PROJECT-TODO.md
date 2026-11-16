@@ -7,7 +7,7 @@ The end state matches the rene404 setup: AGENTS.md is authoritative, CLAUDE.md i
 Canonical paths in this layout:
 
 - `skills/` (top-level) — canonical home for Claude Code skills, also referenced by `.codex-plugin/` and `.cursor-plugin/`
-- `.claude/skills/ → ../skills/` — optional symlink that lets Claude Code auto-discover skills when you open the repo (without installing the plugin)
+- `.claude/skills/ → ../skills/` — symlink that lets Claude Code discover these skills. Claude Code only discovers project skills under `.claude/skills/`; without the symlink the SessionStart hook still injects the router, but `/using-<slug>` cannot be invoked. If you don't need top-level `skills/` (no Codex/Cursor manifests of your own), put the router straight into `.claude/skills/using-<slug>/` and skip the symlink.
 - `agents/`, `prompts/` at top level
 - `.github/instructions/` stays in `.github/` — GitHub Copilot convention
 
@@ -49,7 +49,7 @@ Canonical paths in this layout:
 
 ## 2. Router skill
 
-- [ ] `cp -r <path-to-rene404>/skills/using-rene404/ <new-repo>/skills/using-<slug>/`
+- [ ] Copy the plugin's `skills/using-template/` folder to `skills/using-<slug>/` (or `.claude/skills/using-<slug>/` without the symlink layout)
 - [ ] Move (don't delete) `NEW-PROJECT-TODO.md` from the copy to the repo root — that's the working checklist you're filling out right now
 - [ ] Edit `skills/using-<slug>/SKILL.md`:
   - [ ] Frontmatter `name:` → `using-<slug>`
@@ -59,10 +59,10 @@ Canonical paths in this layout:
   - [ ] Update "Multi-stage chains" with skills you actually have. Drop steps you don't.
   - [ ] Keep "When to use this skill", "Rules", "Anti-patterns" sections as-is
   - [ ] Remove the "Adapting to another project" footer (you've already done it)
-- [ ] If you're keeping the `.claude/skills/ → ../skills/` symlink, create it:
-  - [ ] `cd .claude && ln -s ../skills skills && cd ..`
+- [ ] If the router lives in top-level `skills/`, create the `.claude/skills/ → ../skills/` symlink so Claude Code can discover it:
+  - [ ] `mkdir -p .claude && cd .claude && ln -s ../skills skills && cd ..`
   - [ ] `git add .claude/skills`
-  - [ ] Skip this step if you'd rather install the plugin via marketplace and not pollute `.claude/`.
+  - [ ] Skip this step only if the router already lives in `.claude/skills/using-<slug>/`.
 
 ## 3. Skills (`skills/`)
 
@@ -156,4 +156,4 @@ This is what makes the same routing work across Claude Code, Codex, Cursor, and 
 | **No Docker** | Update common commands. Drop `/devops` rows that reference Compose. |
 | **No GitHub Copilot** | Drop `.github/instructions/` entirely. Move scoped rules into the relevant skill or instruction-style sections inside `AGENTS.md`. |
 | **Claude Code only, no Codex/Cursor** | Skip section 7 entirely. Project-local `.claude/skills/` is enough. |
-| **No symlink** (clean repo root only) | Skip the `.claude/skills` symlink step. Install the plugin via marketplace (`.claude-plugin/marketplace.json`) instead — the SessionStart hook handles bootstrapping. |
+| **No symlink** (clean repo root only) | Put the router directly in `.claude/skills/using-<slug>/` instead of top-level `skills/`. The SessionStart hook finds it there, and Claude Code discovers it as a project skill. |

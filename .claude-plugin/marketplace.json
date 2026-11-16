@@ -1,6 +1,6 @@
 {
-  "name": "workflow-skills-dev",
-  "description": "Local development marketplace for workflow-skills",
+  "name": "workflow-skills",
+  "description": "Marketplace for the workflow-skills plugin: stack-agnostic methodology skills for coding agents",
   "owner": {
     "name": "René Wörndl"
   },

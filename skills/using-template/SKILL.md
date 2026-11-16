@@ -1,6 +1,6 @@
 ---
 name: using-template
-description: Workflow router TEMPLATE for projects that install the workflow-skills plugin. Maps task descriptions to the smallest combination of skill / agent / prompt / instruction needed to do the work. This file is intentionally generic — copy it to a project as `skills/using-<project>/SKILL.md` and fill in the "Project routes" table with that project's real paths. Read-only — does not execute work itself. Do NOT invoke this template as-is in a project that has its own `using-<project>` router — that one has the real routes.
+description: Workflow router TEMPLATE for projects that install the workflow-skills plugin. Maps task descriptions to the smallest combination of skill / agent / prompt / instruction needed to do the work. This file is intentionally generic — copy it to a project as `.claude/skills/using-<project>/SKILL.md` and fill in the "Project routes" table with that project's real paths. Read-only — does not execute work itself. Do NOT invoke this template as-is in a project that has its own `using-<project>` router — that one has the real routes.
 ---
 
 <!--
@@ -12,7 +12,7 @@ adopt the routing pattern without rebuilding it from scratch.
 
 To use in a project:
 
-1. Copy this folder into your project at `skills/using-<project>/`
+1. Copy this folder into your project at `.claude/skills/using-<project>/`
    (where `<project>` is your repo slug, e.g. `using-acme`, `using-mobile-app`).
 2. Move NEW-PROJECT-TODO.md (sibling of this file) to your repo root and
    work through it.

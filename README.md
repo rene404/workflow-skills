@@ -21,7 +21,7 @@ Works in Claude Code, Codex, Cursor, and Copilot CLI through per-harness plugin 
   - `zoom-out` — architecture health review
   - `devops` — safely change infrastructure/CI/CD/deployment
   - `write-skill` — author a new skill following these conventions
-- **`using-template`** — a router skill template. Copy it into your project as `skills/using-<project>/` and fill in the routing table.
+- **`using-template`** — a router skill template. Copy it into your project as `.claude/skills/using-<project>/` and fill in the routing table.
 - **Cross-harness plugin manifests** for Claude Code (`.claude-plugin/`), Codex (`.codex-plugin/`), and Cursor (`.cursor-plugin/`).
 - **SessionStart hook** (`hooks/session-start` + `hooks/run-hook.cmd`) that injects the router into the agent's context, emitting the right JSON dialect per harness.
 
@@ -35,50 +35,41 @@ That's a deliberate choice: agent playbooks and reusable prompts in real project
 
 ### Claude Code
 
-```sh
-# from a git URL:
-/plugin install workflow-skills@git+https://github.com/rene404/workflow-skills.git
+Tested with Claude Code 2.1.325. In a session:
 
-# or from a local checkout (dev marketplace):
-/plugin marketplace add /path/to/workflow-skills
-/plugin install workflow-skills@workflow-skills-dev
+```
+/plugin marketplace add rene404/workflow-skills
+/plugin install workflow-skills@workflow-skills
 ```
 
-The SessionStart hook fires on `startup | clear | compact` and injects the router into context.
-
-### Codex
+Or from a shell:
 
 ```sh
-codex plugins install workflow-skills@git+https://github.com/rene404/workflow-skills.git
+claude plugin marketplace add rene404/workflow-skills
+claude plugin install workflow-skills@workflow-skills
 ```
 
-For marketplace distribution you submit a PR adding the plugin to OpenAI's `openai-codex-plugins` repo — see [obra/superpowers' sync script](https://github.com/obra/superpowers/blob/main/scripts/sync-to-codex-plugin.sh) for the pattern.
+The skills are namespaced by the plugin: invoke them as `/workflow-skills:plan`, `/workflow-skills:tdd`, and so on. They also trigger on their descriptions, so "plan this" picks up `plan` without the slash command. The SessionStart hook fires on `startup | clear | compact` and injects the router into context.
 
-### Cursor
+To try a local checkout instead, pass its path: `claude plugin marketplace add /path/to/workflow-skills`.
 
-Add to your project's `.cursor/config`:
+### Codex, Cursor, Copilot CLI (untested)
 
-```json
-{
-  "plugins": ["workflow-skills@git+https://github.com/rene404/workflow-skills.git"]
-}
-```
-
-### Copilot CLI
-
-```sh
-copilot plugin install workflow-skills@git+https://github.com/rene404/workflow-skills.git
-```
+The repo ships manifests for these harnesses (`.codex-plugin/plugin.json`, `.cursor-plugin/plugin.json`; Copilot CLI reuses the SDK-standard hook output), but installing through them has not been verified yet. Follow your harness's own plugin documentation and point it at `https://github.com/rene404/workflow-skills`. Reports of what works are welcome as issues.
 
 ## Using in a project
 
 Once installed, the skills auto-trigger on their description triggers (e.g., user says "plan this" → `/plan`). To get the routing-table experience for your specific project, copy the `using-template` skill:
 
 ```sh
-cp -r ~/.claude/plugins/workflow-skills/skills/using-template /your/project/skills/using-<your-project>
 cd /your/project
-mv skills/using-<your-project>/NEW-PROJECT-TODO.md ./NEW-PROJECT-TODO.md
+git clone --depth 1 https://github.com/rene404/workflow-skills.git /tmp/workflow-skills
+mkdir -p .claude/skills
+cp -r /tmp/workflow-skills/skills/using-template .claude/skills/using-<your-project>
+mv .claude/skills/using-<your-project>/NEW-PROJECT-TODO.md ./NEW-PROJECT-TODO.md
 ```
+
+The router goes under `.claude/skills/` because that is where Claude Code discovers project skills; anywhere else, the hook still injects it but `/using-<your-project>` cannot be invoked.
 
 Then work through `NEW-PROJECT-TODO.md`. It walks you through:
 
@@ -92,8 +83,8 @@ Then work through `NEW-PROJECT-TODO.md`. It walks you through:
 
 `hooks/session-start` is a single bash script that:
 
-1. Looks for a project-local router at `skills/using-<project>/SKILL.md` or
-   `.claude/skills/using-<project>/SKILL.md`. If one exists, it injects that router in
+1. Looks for a project-local router at `.claude/skills/using-<project>/SKILL.md`
+   (or, for older setups, `skills/using-<project>/SKILL.md`). If one exists, it injects that router in
    full — it has the concrete routes for that codebase. If not, it injects a slim
    fallback naming the available skills and the standard chain. The plugin's own
    `using-template` is never injected: its routing table is an empty placeholder, so
@@ -110,11 +101,14 @@ This pattern is borrowed from [obra/superpowers](https://github.com/obra/superpo
 
 ## Versioning
 
-Tagged releases. Consuming projects should pin to a tag (e.g., `v0.1.0`) until you're ready to track changes:
+Tagged releases. To pin to a tag, add the marketplace at that ref:
 
+```sh
+claude plugin marketplace add 'rene404/workflow-skills#v0.3.0'
+claude plugin install workflow-skills@workflow-skills
 ```
-/plugin install workflow-skills@git+https://github.com/rene404/workflow-skills.git#v0.1.0
-```
+
+Third-party marketplaces do not auto-update by default. To pick up a new release, run `claude plugin marketplace update workflow-skills` and then `claude plugin update workflow-skills@workflow-skills`, or enable auto-update for the marketplace under `/plugin` > Marketplaces.
 
 Breaking changes (skill renames, removed skills) get a major version bump. New skills get a minor bump. Fixes/wording get a patch bump.
 

@@ -34,8 +34,8 @@ escape_for_json() {
 # Locate a project-local router, ignoring the plugin's own template.
 project_router=""
 for candidate in \
-    "${PWD}"/skills/using-*/SKILL.md \
-    "${PWD}"/.claude/skills/using-*/SKILL.md
+    "${PWD}"/.claude/skills/using-*/SKILL.md \
+    "${PWD}"/skills/using-*/SKILL.md
 do
     [ -f "${candidate}" ] || continue
     case "${candidate}" in
@@ -66,7 +66,7 @@ For a larger feature, chain: /clarify-requirements -> /design (if architectural)
 
 Do not stack overlapping skills to be safe. Route once, then execute. AGENTS.md and any scoped instruction files stay authoritative for the rules; skills only guide execution.
 
-This project has no router of its own. To add one, copy \`skills/using-template/\` from this plugin to \`skills/using-<project>/\` and fill in its routing table."
+This project has no router of its own. To add one, copy \`skills/using-template/\` from this plugin to \`.claude/skills/using-<project>/\` and fill in its routing table."
 fi
 
 session_context="<IMPORTANT>
