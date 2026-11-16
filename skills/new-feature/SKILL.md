@@ -69,12 +69,12 @@ Execute the plan task by task using red-green-refactor:
 
 ---
 
-### Phase 5 — Verify (use `/verify`)
+### Phase 5 — Verify
 
 - Run the full test suite fresh.
 - Confirm the feature's observable behaviour end-to-end.
 - Check for regressions.
-- For schema changes: run up/down/up migration cycle.
+- For schema changes: apply, roll back and re-apply the migration.
 
 **Gate:** All verification steps pass. → Proceed to Phase 6.
 
@@ -112,6 +112,5 @@ The feature is complete when:
 - `/harden-plan` — Phase 2.5 detail
 - `/plan` — Phase 3 detail
 - `/tdd` — Phase 4 detail
-- `/verify` — Phase 5 detail
 - `/review` — Phase 6 detail
 - `/handoff` — if the feature spans multiple sessions

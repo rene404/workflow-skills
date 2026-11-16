@@ -112,4 +112,3 @@ The same four failure modes appear on every CI provider; only the syntax changes
 
 - `/plan` — coordinate infra + application changes together
 - `/diagnose` — debug a failing CI/CD run or Docker startup failure
-- `/verify` — confirm application tests pass after infra change

@@ -6,6 +6,27 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); version
 
 ## [Unreleased]
 
+## [1.0.0] — 2026-11-16
+
+Claude Code only, and one skill fewer. Both are breaking, hence the major version.
+
+### Removed
+
+- **Codex, Cursor and Copilot CLI support.** `.codex-plugin/`, `.cursor-plugin/`,
+  `hooks/hooks-cursor.json` and the hook's snake_case / top-level `additionalContext`
+  output are gone; the hook now emits only Claude Code's
+  `hookSpecificOutput.additionalContext`. None of these harnesses had ever been tested,
+  and keeping untested manifests in a public plugin promised something nobody had
+  verified. The consumer checklist (`NEW-PROJECT-TODO.md`) lost its cross-harness
+  section: the router lives in `.claude/skills/using-<project>/` and the installed
+  plugin's hook finds it, with nothing to copy.
+- **The `verify` skill.** The 0.3.0 transcripts showed it triggering correctly but not
+  changing the outcome: without it, Opus 5.5 already re-ran the tests and answered "not
+  done". Under this repo's own rule, a skill that does not change observable behaviour
+  does not ship. `new-feature` keeps its verification phase as inline steps; every other
+  reference to `/verify` (chains, Related sections, the hook fallback) is removed.
+  13 skills remain.
+
 ## [0.3.0] — 2026-11-16
 
 Prepares the repo for being public: the documented install now works, the hook

@@ -56,5 +56,4 @@ Before declaring a slice done:
 ## Related
 
 - `/plan` — break the feature into TDD-ready slices before starting
-- `/verify` — final check before closing the task
 - `/diagnose` — if a test fails unexpectedly during the cycle

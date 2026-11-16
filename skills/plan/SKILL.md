@@ -59,4 +59,3 @@ No "TBD", no "as needed", no vague descriptions. If you can't write a specific f
 
 - `/clarify-requirements` — clarify requirements before planning
 - `/tdd` — execute the plan using red-green-refactor
-- `/verify` — confirm the full plan was executed correctly

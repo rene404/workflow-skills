@@ -77,14 +77,13 @@ The layout is flat — one directory per skill, no category folders. Supporting
 files (formats, templates, references) live beside `SKILL.md` in the same folder.
 
 **No manifest edit is needed.** Claude Code discovers `skills/` automatically, so
-`.claude-plugin/plugin.json` carries no `skills` key at all. The Codex and Cursor
-manifests point at the *directory* once (`"skills": "./skills/"`) — they never list
-individual skills. Adding a per-skill path to any manifest is a bug, not a step.
+`.claude-plugin/plugin.json` carries no `skills` key at all. Adding a per-skill path
+to the manifest is a bug, not a step.
 
 What does need updating when a skill is added:
 - `README.md` — the skill list under "What's in the box"
 - `CHANGELOG.md` — an entry under `[Unreleased]`
-- the version in all four manifests, if you are cutting a release (see `AGENTS.md`)
+- the version in `.claude-plugin/plugin.json` and `marketplace.json`, if you are cutting a release (see `AGENTS.md`)
 
 ### 5. Test the description
 

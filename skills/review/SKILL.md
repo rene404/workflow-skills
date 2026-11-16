@@ -76,6 +76,5 @@ later dimension changes what the author has to fix.
 
 ## Related
 
-- `/verify` — run tests before or after this review
 - `/zoom-out` — for structural or architectural concerns beyond this diff
 - `/tdd` — if tests are missing and need to be written

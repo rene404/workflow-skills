@@ -1,14 +1,14 @@
 {
   "name": "workflow-skills",
-  "description": "Marketplace for the workflow-skills plugin: stack-agnostic methodology skills for coding agents",
+  "description": "Marketplace for the workflow-skills plugin: stack-agnostic methodology skills for Claude Code",
   "owner": {
     "name": "René Wörndl"
   },
   "plugins": [
     {
       "name": "workflow-skills",
-      "description": "Methodology skills for coding agents: planning, design, TDD, debugging, verification, review, handoff",
-      "version": "0.3.0",
+      "description": "Methodology skills for Claude Code: planning, design, TDD, debugging, review, handoff",
+      "version": "1.0.0",
       "source": "./",
       "author": {
         "name": "René Wörndl"

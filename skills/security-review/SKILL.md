@@ -81,4 +81,3 @@ Examine each area. Report every finding — do not filter by likelihood.
 ## Related
 
 - `/review` — general code review (correctness, tests, conventions)
-- `/verify` — confirm tests pass after security fixes are applied

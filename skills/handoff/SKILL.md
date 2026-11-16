@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Generate a structured handoff document that captures the current state of work so the next session (or another agent) can continue without losing context. Use when the user says "handoff", "I need to stop here", "summarise where we are", "create a handoff", or the session is ending mid-task. Do NOT use for finished work — use /verify to close it out.
+description: Generate a structured handoff document that captures the current state of work so the next session (or another agent) can continue without losing context. Use when the user says "handoff", "I need to stop here", "summarise where we are", "create a handoff", or the session is ending mid-task. Do NOT use for finished work — close it out with a fresh test run and /review instead.
 argument-hint: [optional: topic or branch name]
 ---
 
@@ -62,4 +62,3 @@ git checkout [branch]
 ## Related
 
 - `/plan` — if the remaining work needs to be planned before the next session starts
-- `/verify` — run this first if the session ended mid-verification

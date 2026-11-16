@@ -62,4 +62,3 @@ Run each phase in order. Do not skip ahead.
 ## Related
 
 - `/tdd` — if the fix requires new behaviour, drive it with tests
-- `/verify` — final check after fix is in place

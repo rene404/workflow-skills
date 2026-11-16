@@ -39,7 +39,7 @@ A workflow router maps a task description to the smallest combination of artifac
 - **Claude Code skills** — invoked via the Skill tool. Some ship from the `workflow-skills` plugin (e.g., `/plan`, `/tdd`, `/review`); others are project-local in `.claude/skills/`. Plugin skills are namespaced in Claude Code: `/plan` here means `/workflow-skills:plan`.
 - **Agent playbooks** in `agents/*.agent.md` — role-specific procedures (planner, builder, debugger, etc.). Project-defined.
 - **Reusable prompts** in `prompts/*.prompt.md` — named starter prompts for repeating tasks (e.g., add-endpoint, bugfix-from-trace). Project-defined.
-- **Scoped instructions** in `.github/instructions/*.instructions.md` — file-scoped Copilot-style rules. Project-defined.
+- **Scoped instructions** in `.github/instructions/*.instructions.md` — file-scoped rules, opened when a route names them. Project-defined.
 
 `AGENTS.md` and the instructions files remain authoritative for the rules — this router only picks which tools execute the rules.
 
@@ -60,7 +60,6 @@ Example rows (delete and replace with your project's real triggers):
 | "write tests", "add tests for X" | [write-tests.prompt.md](../../prompts/write-tests.prompt.md), [test.agent.md](../../agents/test.agent.md) |
 | "review this", "is this ready to merge?" | `/review` skill, [review.agent.md](../../agents/review.agent.md) |
 | "is this safe?", security audit | `/security-review` skill, [security.agent.md](../../agents/security.agent.md) |
-| "verify this works", "are we done?" | `/verify` skill |
 | Architecture health, tech debt check | `/zoom-out` skill |
 | Full end-to-end feature | `/new-feature` skill |
 | "handoff", session ending | `/handoff` skill |
@@ -80,9 +79,8 @@ For a larger feature, chain in this order:
 3. `/harden-plan` if domain terms or past decisions are at stake, else skip
 4. `/plan` → concrete bite-sized tasks
 5. `/tdd` per task → red-green-refactor
-6. `/verify` → fresh end-to-end check
-7. `/review` (or `/security-review` if sensitive code)
-8. `/handoff` if stopping mid-feature
+6. `/review` (or `/security-review` if sensitive code)
+7. `/handoff` if stopping mid-feature
 
 `/new-feature` orchestrates this end-to-end if you want one entry point.
 

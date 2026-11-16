@@ -2,7 +2,7 @@
 
 This file is the source of truth for agent work in this repository.
 
-`workflow-skills` is a methodology plugin: it ships skills (behavior-shaping markdown), plugin manifests for Claude Code / Codex / Cursor / Copilot CLI, and a session-start hook that bootstraps a router across harnesses.
+`workflow-skills` is a methodology plugin: it ships skills (behavior-shaping markdown), a Claude Code plugin manifest, and a session-start hook that injects the project's router. Claude Code is the only supported harness.
 
 ## Goals
 
@@ -15,8 +15,8 @@ This file is the source of truth for agent work in this repository.
 
 - `skills/` — methodology skills (one folder per skill, each containing `SKILL.md` + optional `references/`)
 - `skills/using-template/` — router skill template + `NEW-PROJECT-TODO.md` checklist consumers use to adopt the plugin
-- `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/` — per-harness plugin manifests (Copilot CLI reuses the Codex/SDK-standard hook output, no separate manifest folder)
-- `hooks/` — `session-start` (bash), `run-hook.cmd` (polyglot wrapper), `hooks.json` (Claude), `hooks-cursor.json` (Cursor)
+- `.claude-plugin/` — Claude Code plugin manifest + marketplace
+- `hooks/` — `session-start` (bash), `run-hook.cmd` (polyglot wrapper so it also runs under Git Bash on Windows), `hooks.json` (registration)
 - `tests/hook-test.sh` — tests for the SessionStart hook (bash + python3); run by `.github/workflows/hook-test.yml` on Ubuntu and macOS
 - `examples/` — before/after transcripts showing each skill's behaviour change, plus the demo project they run against
 - `README.md` — installation + usage docs
@@ -41,15 +41,11 @@ This file is the source of truth for agent work in this repository.
    the triggers in the body spends context on every load and changes nothing about
    which skill gets picked.
 4. **No stack references** in the body. If you need an example, use `<migrate>` or "your test runner" not `alembic` or `pytest`.
-5. **Test the skill** in at least one harness before merging. If it doesn't change observable behavior, it doesn't ship.
+5. **Test the skill** in a Claude Code session before merging. If it doesn't change observable behavior, it doesn't ship.
 
-## Adding a new harness
+## Acceptance test
 
-1. Add a manifest at `.<harness>-plugin/plugin.json`. Follow that harness's conventions for the manifest shape.
-2. Add a hook output branch to `hooks/session-start` that matches the harness's env var (`<HARNESS>_PLUGIN_ROOT` or similar) and emits the JSON shape that harness expects.
-3. Add a `hooks/hooks-<harness>.json` if the harness uses a separate config file.
-4. **Acceptance test**: open a clean session in the new harness, send `"plan a new feature for me"`, confirm the `plan` skill auto-triggers (`/workflow-skills:plan` in Claude Code, where plugin skills are namespaced) and the user is asked clarifying questions before any code is written.
-5. Update `README.md` install section.
+After changing the hook or the router template: open a clean Claude Code session, send `"plan a new feature for me"`, and confirm the `plan` skill auto-triggers (`/workflow-skills:plan`; Claude Code namespaces plugin skills) and the user is asked clarifying questions before any code is written.
 
 ## What not to add
 
@@ -64,10 +60,10 @@ This file is the source of truth for agent work in this repository.
 Semver-ish:
 
 - **Patch (`0.1.x`)** — wording fixes, doc clarifications, hook bugfixes
-- **Minor (`0.x.0`)** — new skill added, new harness supported
+- **Minor (`x.y.0`)** — new skill added
 - **Major (`x.0.0`)** — skill renamed/removed (consumer routers break), hook output format changed, frontmatter schema changed
 
-Bump in `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and `CHANGELOG.md` in one commit. Tag the release.
+Bump in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and `CHANGELOG.md` in one commit. Tag the release.
 
 ## Workflow
 
@@ -75,13 +71,13 @@ For non-trivial changes, the skills in this very repo apply:
 
 1. `/plan` — sketch the change
 2. `/tdd` if relevant (most skill changes don't need tests — they need transcripts)
-3. `/verify` — open a session, run the trigger phrase, confirm behavior changed as intended
+3. Verify: open a session, run the trigger phrase, confirm behavior changed as intended
 4. `/review` — your diff before opening a PR
 
 ## Definition of done
 
 - Skill (or hook, or manifest) does what its description says
-- Behavior change demonstrated in at least one harness session (paste the transcript in the PR)
+- Behavior change demonstrated in a Claude Code session (paste the transcript in the PR)
 - README updated if install steps changed
 - CHANGELOG updated
 - Version bumped if the surface changed
