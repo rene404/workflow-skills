@@ -18,6 +18,7 @@ This file is the source of truth for agent work in this repository.
 - `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/` — per-harness plugin manifests (Copilot CLI reuses the Codex/SDK-standard hook output, no separate manifest folder)
 - `hooks/` — `session-start` (bash), `run-hook.cmd` (polyglot wrapper), `hooks.json` (Claude), `hooks-cursor.json` (Cursor)
 - `tests/hook-test.sh` — tests for the SessionStart hook (bash + python3); run by `.github/workflows/hook-test.yml` on Ubuntu and macOS
+- `examples/` — before/after transcripts showing each skill's behaviour change, plus the demo project they run against
 - `README.md` — installation + usage docs
 - `CHANGELOG.md` — releases
 - `LICENSE` — MIT
