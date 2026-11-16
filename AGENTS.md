@@ -17,6 +17,7 @@ This file is the source of truth for agent work in this repository.
 - `skills/using-template/` — router skill template + `NEW-PROJECT-TODO.md` checklist consumers use to adopt the plugin
 - `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/` — per-harness plugin manifests (Copilot CLI reuses the Codex/SDK-standard hook output, no separate manifest folder)
 - `hooks/` — `session-start` (bash), `run-hook.cmd` (polyglot wrapper), `hooks.json` (Claude), `hooks-cursor.json` (Cursor)
+- `tests/hook-test.sh` — tests for the SessionStart hook (bash + python3); run by `.github/workflows/hook-test.yml` on Ubuntu and macOS
 - `README.md` — installation + usage docs
 - `CHANGELOG.md` — releases
 - `LICENSE` — MIT

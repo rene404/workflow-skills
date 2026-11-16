@@ -83,17 +83,24 @@ Then work through `NEW-PROJECT-TODO.md`. It walks you through:
 
 `hooks/session-start` is a single bash script that:
 
-1. Looks for a project-local router at `.claude/skills/using-<project>/SKILL.md`
+1. Starts from the session's directory (`CLAUDE_PROJECT_DIR` / `CURSOR_PROJECT_DIR`, else
+   the current directory) and walks up to the git root, like Claude Code's own skill
+   discovery, so a session started in a subdirectory still finds the router. The closest
+   router wins. Outside a git repo only the start directory is checked.
+2. Looks for a project-local router at `.claude/skills/using-<project>/SKILL.md`
    (or, for older setups, `skills/using-<project>/SKILL.md`). If one exists, it injects that router in
    full — it has the concrete routes for that codebase. If not, it injects a slim
    fallback naming the available skills and the standard chain. The plugin's own
    `using-template` is never injected: its routing table is an empty placeholder, so
    shipping it into every session would cost context and route nothing.
-2. Detects which harness is invoking it via env vars (`CURSOR_PLUGIN_ROOT`, `CLAUDE_PLUGIN_ROOT`, `COPILOT_CLI`)
-3. Emits the JSON shape that harness expects:
-   - Cursor → `additional_context` (snake_case top-level)
-   - Claude Code → `hookSpecificOutput.additionalContext` (nested)
-   - Codex / Copilot CLI / SDK-standard → `additionalContext` (camelCase top-level)
+3. Detects which harness is invoking it via env vars (`CURSOR_PLUGIN_ROOT`, `CLAUDE_PLUGIN_ROOT`, `COPILOT_CLI`)
+4. Emits the JSON shape that harness expects:
+   - Cursor → `additional_context` (snake_case top-level), registered via `hooks/hooks-cursor.json`
+   - Claude Code → `hookSpecificOutput.additionalContext` (nested), registered via `hooks/hooks.json`
+   - Codex → reads `hooks/hooks.json` by default and sets `CLAUDE_PLUGIN_ROOT` for compatibility, so it gets the Claude Code shape, which Codex also accepts (untested; Codex asks you to trust plugin hooks via `/hooks` first)
+   - Copilot CLI / SDK-standard → `additionalContext` (camelCase top-level)
+
+`bash tests/hook-test.sh` covers the dialects, the router lookup and JSON escaping.
 
 `hooks/run-hook.cmd` is a polyglot Unix bash + Windows `.cmd` wrapper so the hook also works under Git Bash on Windows.
 

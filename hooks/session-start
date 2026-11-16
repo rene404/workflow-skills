@@ -6,8 +6,8 @@
 # instruction for the user's request before doing work.
 #
 # What gets injected depends on the project:
-#   - Project has its own router (skills/using-<project>/SKILL.md or
-#     .claude/skills/using-<project>/SKILL.md) -> inject that router in full.
+#   - Project has its own router (.claude/skills/using-<project>/SKILL.md, or
+#     legacy skills/using-<project>/SKILL.md) -> inject that router in full.
 #     It has concrete routes for this codebase; that is the useful one.
 #   - No project router -> inject a slim fallback naming the available skills
 #     and the standard chain. The plugin's own using-template is never
@@ -22,33 +22,65 @@
 set -euo pipefail
 
 escape_for_json() {
-    local s="$1"
-    s="${s//\\/\\\\}"
-    s="${s//\"/\\\"}"
-    s="${s//$'\n'/\\n}"
-    s="${s//$'\r'/\\r}"
-    s="${s//$'\t'/\\t}"
-    printf '%s' "$s"
+    # Byte-wise (LC_ALL=C) so UTF-8 passes through untouched. Every control
+    # character is escaped: \n \r \t by name, the rest of 0x01-0x1F as \u00XX,
+    # since any of them unescaped makes the whole JSON payload invalid. awk
+    # instead of ${s//...}: bash 3.2 substitution is quadratic and took seconds
+    # on a 10 KB router.
+    printf '%s' "$1" | LC_ALL=C awk '
+        BEGIN {
+            for (i = 1; i < 32; i++) esc[sprintf("%c", i)] = sprintf("\\u%04x", i)
+            esc["\t"] = "\\t"; esc["\r"] = "\\r"
+            esc["\\"] = "\\\\"; esc["\""] = "\\\""
+        }
+        {
+            if (NR > 1) printf "\\n"
+            n = length($0)
+            for (j = 1; j <= n; j++) {
+                c = substr($0, j, 1)
+                printf "%s", ((c in esc) ? esc[c] : c)
+            }
+        }'
 }
+
+# Where the session started: the harness's own variable if it sets one, else
+# the current directory. Cursor runs plugin hooks from the plugin's install
+# directory, so CURSOR_PROJECT_DIR matters there; Claude Code sets
+# CLAUDE_PROJECT_DIR to the start directory, which may be a subdirectory.
+start_dir="${CLAUDE_PROJECT_DIR:-${CURSOR_PROJECT_DIR:-$PWD}}"
+start_dir=$(cd "${start_dir}" 2>/dev/null && pwd -P || printf '%s' "${PWD}")
+
+# Walk up from the start directory to the git root, the way Claude Code
+# discovers project skills, and take the closest router. Outside a git repo
+# only the start directory counts: walking up to / could pick up a router that
+# belongs to something else.
+stop_dir=$(git -C "${start_dir}" rev-parse --show-toplevel 2>/dev/null || true)
+stop_dir="${stop_dir:-$start_dir}"
 
 # Locate a project-local router, ignoring the plugin's own template.
 project_router=""
-for candidate in \
-    "${PWD}"/.claude/skills/using-*/SKILL.md \
-    "${PWD}"/skills/using-*/SKILL.md
-do
-    [ -f "${candidate}" ] || continue
-    case "${candidate}" in
-        */using-template/SKILL.md) continue ;;
-    esac
-    project_router="${candidate}"
-    break
+project_dir="${start_dir}"
+while :; do
+    for candidate in \
+        "${project_dir}"/.claude/skills/using-*/SKILL.md \
+        "${project_dir}"/skills/using-*/SKILL.md
+    do
+        [ -f "${candidate}" ] || continue
+        case "${candidate}" in
+            */using-template/SKILL.md) continue ;;
+        esac
+        project_router="${candidate}"
+        break 2
+    done
+    [ "${project_dir}" = "${stop_dir}" ] && break
+    [ "${project_dir}" = "/" ] && break
+    project_dir=$(dirname "${project_dir}")
 done
 
 if [ -n "${project_router}" ]; then
     router_content=$(cat "${project_router}" 2>/dev/null || true)
     if [ -n "${router_content}" ]; then
-        router_rel="${project_router#"${PWD}"/}"
+        router_rel="${project_router#"${project_dir}"/}"
         body="This project has its own workflow router at \`${router_rel}\`. Follow its routing table to pick the smallest combination of skill / agent playbook / reusable prompt / scoped instruction for the request.
 
 ---
